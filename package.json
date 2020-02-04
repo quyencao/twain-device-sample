@@ -1,0 +1,23 @@
+{
+  "name": "device-nodejs-mqtt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "adm-zip": "^0.4.13",
+    "amqplib": "^0.5.5",
+    "axios": "^0.19.2",
+    "forever-monitor": "^2.0.0"
+  },
+  "bin": "main1.js",
+  "pkg": {
+    "scripts": "download.js",
+    "assets": "node_modules/**/*"
+  }
+}

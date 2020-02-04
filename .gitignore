@@ -1,0 +1,4 @@
+node_modules/
+twain/node_modules/
+venv/
+.vscode/
