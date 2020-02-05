@@ -107,15 +107,17 @@ amqp.connect('amqp://guest:guest@localhost:5672').then(function(conn) {
                     run.kill();
                 }
     
-                install = new Monitor('/twain/code/install.sh', {
+                install = new Monitor('install.sh', {
                     max: 1,
                     killTree: true,
                     pidFile: '/var/run/install.pid',
                     command: 'bash',
+                    sourceDir: '/twain/code',
                     env: { 
                         SOURCE_DIRECTORY: '/twain/code',
                         MODEL_DIRECTORY: '/twain/model'
-                    }
+                    },
+                    cwd: '/twain/code'
                 });
     
                 install.on('start', () => {
@@ -136,15 +138,17 @@ amqp.connect('amqp://guest:guest@localhost:5672').then(function(conn) {
                     install = undefined;
     
                     if (code === 0) {
-                        run = new Monitor('/twain/code/main.py', {
+                        run = new Monitor('main.py', {
                             max: 1,
                             killTree: true,
                             pidFile: '/var/run/run.pid',
                             command: 'python3',
+                            sourceDir: '/twain/code',
                             env: { 
                                 SOURCE_DIRECTORY: '/twain/code',
                                 MODEL_DIRECTORY: '/twain/model'
-                            }
+                            },
+                            cwd: '/twain/code'
                         });
             
                         run.on('start', () => {
