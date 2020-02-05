@@ -193,7 +193,41 @@ amqp.connect('amqp://guest:guest@localhost:5672').then(function(conn) {
     });
 
     return ok.then(function(_consumeOk) {
-      console.log(' [*] Waiting for messages. To exit press CTRL+C');
+
+        run = new Monitor('main.py', {
+            max: 1,
+            killTree: true,
+            pidFile: '/var/run/run.pid',
+            command: 'python3',
+            sourceDir: '/twain/code',
+            env: { 
+                SOURCE_DIRECTORY: '/twain/code',
+                MODEL_DIRECTORY: '/twain/model'
+            },
+            cwd: '/twain/code'
+        });
+
+        run.on('start', () => {
+            console.log('run START');
+        });
+
+        run.on('stdout', (data) => {
+            console.log('run DATA', data.toString());
+            ch.publish('', 'face_recog', data);
+        });
+
+        run.on('error', (error) => {
+            console.log('run ERROR', error);
+        });
+    
+        run.on('exit:code', (code) => {
+            console.log('run exit', code);
+            run = undefined;
+        });
+
+        run.start();  
+
+        console.log(' [*] Waiting for messages. To exit press CTRL+C');
     });
 
   });
