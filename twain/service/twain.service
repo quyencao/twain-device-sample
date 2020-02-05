@@ -1,0 +1,16 @@
+[Unit]
+Description=Twain Device Service
+After=network.target
+
+[Service]
+Type=simple
+# PIDFile=/var/run/twain.pid
+Restart=on-failure
+ExecStart=/twain/service/twaind
+# WorkingDirectory=/twain/service/
+Environment=PYTHONUNBUFFERED=1
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target

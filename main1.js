@@ -1,15 +1,31 @@
 const amqp = require('amqplib');
 const forever = require('forever-monitor');
 const Monitor = forever.Monitor;
+const config = require('/twain/config/config.json');
 
-const QUEUE = 'device_y';
+const QUEUE = config.id || 'device_y';
+const opts = {
+    // cert: fs.readFileSync('../etc/client/cert.pem'),
+    // key: fs.readFileSync('../etc/client/key.pem'),
+    // cert and key or
+    // pfx: fs.readFileSync('../etc/client/keycert.p12'),
+    // passphrase: 'MySecretPassword',
+    // ca: [fs.readFileSync('../etc/testca/cacert.pem')]
+};
 
 let downloadModel = undefined;
 let downloadSource = undefined;
 let install = undefined;
 let run = undefined;
 
-amqp.connect('amqp://guest:guest@localhost:5672').then(function(conn) {
+amqp.connect({ 
+    hostname: config.host || 'localhost', 
+    port: 5672,
+    username: 'guest',
+    password: 'guest',
+    vhost: '/',
+    protocol: 'amqp'
+}, opts).then(function(conn) {
   process.once('SIGINT', function() { conn.close(); });
 
   return conn.createChannel().then(function(ch) {
