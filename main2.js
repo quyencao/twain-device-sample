@@ -2,6 +2,7 @@ const amqp = require('amqplib');
 const forever = require('forever-monitor');
 const Ajv = require('ajv');
 const fs = require('fs');
+const path = require('path');
 
 const Monitor = forever.Monitor;
 const ajv = new Ajv({ allErrors: true });
@@ -70,14 +71,15 @@ amqp.connect({
         const message = JSON.parse(data.content.toString());
 
         const command = message.command;
+        const downloadFilePath = path.join(__dirname, 'download.js');
 
         switch(command) {
             case 'model':
                 if(downloadModel) {
                     downloadModel.kill();
                 }
-            
-                downloadModel = new Monitor('download.js', {
+                
+                downloadModel = new Monitor(downloadFilePath, {
                     max: 1,
                     killTree: true,
                     pidFile: '/var/run/downloadmodel.pid',
@@ -114,7 +116,7 @@ amqp.connect({
                     downloadSource.kill();
                 }
             
-                downloadSource = new Monitor('download.js', {
+                downloadSource = new Monitor(downloadFilePath, {
                     max: 1,
                     killTree: true,
                     pidFile: '/var/run/downloadsource.pid',

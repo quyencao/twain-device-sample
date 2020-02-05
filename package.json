@@ -18,7 +18,6 @@
   },
   "bin": "main2.js",
   "pkg": {
-    "scripts": "download.js",
-    "assets": "node_modules/**/*"
+    "assets": ["download.js", "node_modules/**/*"]
   }
 }
