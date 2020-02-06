@@ -1,6 +1,6 @@
 #!/bin/bash
-REQUIRED_PYTHON_VERSION="3"
-REQUIRED_PIP_VERSION="3"
+# REQUIRED_PYTHON_VERSION="3"
+# REQUIRED_PIP_VERSION="3"
 
 ################################################################################
 ## Checks if user is running as root
@@ -14,27 +14,27 @@ fi
 ## Checks if Python is installed on the device and if installed, whether its
 ## version meets the requirement.
 ################################################################################
-{
-    ## Python reports the version to STDERR, so have to redirect STDERR to
-    ## STDOUT and not capture the output in a variable.
-    python$REQUIRED_PYTHON_VERSION --version >/dev/null 2>&1
-} || {
-    echo "Python $REQUIRED_PYTHON_VERSION" "Not found"
-    exit 1
-}
+# {
+#     ## Python reports the version to STDERR, so have to redirect STDERR to
+#     ## STDOUT and not capture the output in a variable.
+#     python$REQUIRED_PYTHON_VERSION --version >/dev/null 2>&1
+# } || {
+#     echo "Python $REQUIRED_PYTHON_VERSION" "Not found"
+#     exit 1
+# }
 
 ################################################################################
 ## Checks if pip is installed on the device and if installed, whether its
 ## version meets the requirement.
 ################################################################################
-{
-    ## Pip3 reports the version to STDERR, so have to redirect STDERR to
-    ## STDOUT and not capture the output in a variable.
-    pip$REQUIRED_PIP_VERSION --version >/dev/null 2>&1
-} || {
-    echo "Pip3" "Not found"
-    exit 1
-}
+# {
+#     ## Pip3 reports the version to STDERR, so have to redirect STDERR to
+#     ## STDOUT and not capture the output in a variable.
+#     pip$REQUIRED_PIP_VERSION --version >/dev/null 2>&1
+# } || {
+#     echo "Pip3" "Not found"
+#     exit 1
+# }
 
 cp /twain/service/twain.service /lib/systemd/system/
 
