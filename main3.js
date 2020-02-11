@@ -158,9 +158,6 @@ amqp.connect({
                     run.kill();
                 }
 
-                const PATH = process.env.PATH || '';
-                const VIRTUAL_ENV = '/twain/service/runtime/python';
-    
                 install = new Monitor('install.sh', {
                     max: 1,
                     killTree: true,
@@ -169,9 +166,7 @@ amqp.connect({
                     sourceDir: '/twain/code',
                     env: { 
                         SOURCE_DIRECTORY: '/twain/code',
-                        MODEL_DIRECTORY: '/twain/model',
-                        VIRTUAL_ENV: VIRTUAL_ENV,
-                        PATH: `${VIRTUAL_ENV}/bin:${PATH}`
+                        MODEL_DIRECTORY: '/twain/model'
                     },
                     cwd: '/twain/code'
                 });
@@ -198,13 +193,11 @@ amqp.connect({
                             max: 1,
                             killTree: true,
                             pidFile: '/var/run/run.pid',
-                            command: 'python3',
+                            command: 'python',
                             sourceDir: '/twain/code',
                             env: { 
                                 SOURCE_DIRECTORY: '/twain/code',
                                 MODEL_DIRECTORY: '/twain/model',
-                                VIRTUAL_ENV: VIRTUAL_ENV,
-                                PATH: `${VIRTUAL_ENV}/bin:${PATH}`
                             },
                             cwd: '/twain/code'
                         });
@@ -252,20 +245,15 @@ amqp.connect({
 
     return ok.then(function(_consumeOk) {
 
-        const PATH = process.env.PATH || '';
-        const VIRTUAL_ENV = '/twain/service/runtime/python';
-
         run = new Monitor('main.py', {
             max: 1,
             killTree: true,
             pidFile: '/var/run/run.pid',
-            command: 'python3',
+            command: 'python',
             sourceDir: '/twain/code',
             env: { 
                 SOURCE_DIRECTORY: '/twain/code',
-                MODEL_DIRECTORY: '/twain/model',
-                VIRTUAL_ENV: VIRTUAL_ENV,
-                PATH: `${VIRTUAL_ENV}/bin:${PATH}`
+                MODEL_DIRECTORY: '/twain/model'
             },
             cwd: '/twain/code'
         });
