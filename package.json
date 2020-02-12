@@ -14,7 +14,8 @@
     "ajv": "^6.11.0",
     "amqplib": "^0.5.5",
     "axios": "^0.19.2",
-    "forever-monitor": "^2.0.0"
+    "forever-monitor": "^2.0.0",
+    "mkdirp": "^1.0.3"
   },
   "bin": "main4.js",
   "pkg": {
