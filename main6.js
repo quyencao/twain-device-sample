@@ -123,19 +123,19 @@ function connectRabbitMQ() {
             const node = message.node;
     
             switch(command) {
-                case 'model':
+                case 'DOWNLOAD_MODEL':
                     console.log('command', command);
         
                     break;
-                case 'source':
+                case 'DOWNLOAD_SOURCE':
                     console.log('command', command);
                     
                     break;
-                case 'stop':
+                case 'STOP':
                     console.log('command', command);
                     pm.stopByUid(node);
                     break;
-                case 'run':
+                case 'RUN':
                     console.log('command', command);
                     // const node = message.node;
 
