@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.4.13",
-    "ajv": "^6.11.0",
+    "ajv": "^6.12.3",
     "amqplib": "^0.5.5",
     "axios": "^0.19.2",
     "forever-monitor": "^2.0.0"
